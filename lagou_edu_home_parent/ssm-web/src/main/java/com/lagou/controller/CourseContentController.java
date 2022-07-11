@@ -22,7 +22,7 @@ public class CourseContentController {
     @Autowired
     private CourseContentService courseContentService;
 
-    @RequestMapping("findSectionAndLesson")
+    @RequestMapping("/findSectionAndLesson")
     public ResponseResult findSectionAndLessonByCourseId(Integer courseId){
 
         //调用service层
@@ -81,11 +81,17 @@ public class CourseContentController {
     /*
     * 保存&修改课时
     * */
-    @RequestMapping("/saveLesson")
+    @RequestMapping("/saveOrUpdateLesson")
     public ResponseResult saveOrUpdateLesson(@RequestBody CourseLesson lesson){
 
-        courseContentService.saveLesson(lesson);
-        return new ResponseResult(true,200,"响应成功",null);
+        if (lesson.getId() == null){
+            courseContentService.saveLesson(lesson);
+            return new ResponseResult(true,200,"新增成功",null);
+        }else{
+            courseContentService.updateLesson(lesson);
+            return new ResponseResult(true,200,"修改成功",null);
+        }
+
 
     }
 }

@@ -68,4 +68,10 @@ public class CourseContentServiceImpl implements CourseContentService {
         courseLesson.setUpdateTime(date);
         courseContentMapper.saveLesson(courseLesson);
     }
+
+    @Override
+    public void updateLesson(CourseLesson courseLesson) {
+        courseLesson.setUpdateTime(new Date());
+        courseContentMapper.updateLesson(courseLesson);
+    }
 }

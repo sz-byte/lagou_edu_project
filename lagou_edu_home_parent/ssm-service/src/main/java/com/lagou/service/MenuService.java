@@ -17,4 +17,13 @@ public interface MenuService {
     public List<Menu> findAllMenu();
 
     Menu findMenuById(Integer id);
+
+    /*
+     * 新增菜单
+     * */
+    public void saveMenu(Menu menu);
+    /*
+     * 修改菜单
+     * */
+    public void updateMenu(Menu menu);
 }

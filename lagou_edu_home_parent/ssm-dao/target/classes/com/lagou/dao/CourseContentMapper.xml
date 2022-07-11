@@ -85,7 +85,7 @@
         update course_section set status = #{status},update_time = #{updateTime} where id = #{id}
     </update>
 
-    <!--保存&修改课时信息-->
+    <!--保存课时信息-->
     <insert id="saveLesson" parameterType="com.lagou.domain.CourseLesson">
         INSERT INTO course_lesson (
             id,course_id,
@@ -99,5 +99,11 @@
         )VALUES(#{id},#{courseId},#{sectionId},#{theme},#{duration},#{isFree},
                 #{orderNum},#{createTime},#{updateTime})
     </insert>
+
+    <!--修改课时信息-->
+    <update id="updateLesson" parameterType="com.lagou.domain.CourseLesson">
+        update course_lesson set course_id=#{courseId},section_id=#{sectionId},theme=#{theme},
+                                 duration=#{duration},is_free=#{isFree},order_num=#{orderNum},update_time=#{updateTime} where id=#{id}
+    </update>
 
 </mapper>

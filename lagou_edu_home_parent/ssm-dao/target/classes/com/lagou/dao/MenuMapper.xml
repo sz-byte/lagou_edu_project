@@ -35,4 +35,30 @@
         select * from menu where id = #{id}
     </select>
 
+    <!--"description": "设置课程状态",
+	"href": "updateStatus",
+	"icon": "lock",
+	"name": "课程管理状态",
+	"orderNum": 3,
+	"parentId": 5,
+	"shown": 0,
+	"level":0,
+	"createdTime":"2020-08-10 20:32:41",
+	"updatedTime":"2020-08-10 20:32:41",
+	"createdBy":"system",
+	"updatedBy":"system"-->
+
+    <!--新增菜单-->
+    <insert id="saveMenu" parameterType="com.lagou.domain.Menu">
+        insert menu values (null ,#{parentId},#{href},#{icon},#{name},#{description},
+                            #{orderNum},#{shown},#{level},#{createdTime},#{updatedTime},#{createdBy},#{updatedBy})
+    </insert>
+
+    <!--修改菜单-->
+    <update id="updateMenu" parameterType="com.lagou.domain.Menu">
+        update menu set parent_id=#{parentId},href=#{href},icon=#{icon},name=#{name},description=#{description},
+            order_num=#{orderNum},shown=#{shown},level=#{level},created_time=#{createdTime},updated_time=#{updatedTime},
+                        created_by=#{createdBy},updated_by=#{updatedBy} where id=#{id}
+    </update>
+
 </mapper>

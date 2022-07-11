@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("PromotionAd")
+@RequestMapping("/PromotionAd")
 public class PromotionAdController {
     @Autowired
     private PromotionAdService promotionAdService;
@@ -28,7 +28,7 @@ public class PromotionAdController {
     /*
     * 广告分页查询
     * */
-    @RequestMapping("/findAllPromotionAdByPage")
+    @RequestMapping("/findAllPromotionAd")
     public ResponseResult findAllPromotionAdByPage(PromotionAdVO promotionAdVO){
         PageInfo<PromotionAd> info = promotionAdService.findAllPromotionAdByPage(promotionAdVO);
 

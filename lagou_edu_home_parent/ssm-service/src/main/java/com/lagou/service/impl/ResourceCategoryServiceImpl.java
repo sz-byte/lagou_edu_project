@@ -20,4 +20,19 @@ public class ResourceCategoryServiceImpl implements ResourceCategoryService {
 
         return allResourceCategory;
     }
+
+    @Override
+    public void saveResourceCategory(ResourceCategory resourceCategory) {
+        resourceCategoryMapper.saveResourceCategory(resourceCategory);
+    }
+
+    @Override
+    public void updateResourceCategory(ResourceCategory resourceCategory) {
+        resourceCategoryMapper.updateResourceCategory(resourceCategory);
+    }
+
+    @Override
+    public void deleteResourceCategory(Integer id) {
+        resourceCategoryMapper.deleteResourceCategory(id);
+    }
 }

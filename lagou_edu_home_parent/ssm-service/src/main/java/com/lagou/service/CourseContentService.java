@@ -34,8 +34,13 @@ public interface CourseContentService {
     public void updateSectionStatus(int id,int status);
 
     /*
-    * 保存&修改课程信息
+    * 保存课程信息
     * */
     public void saveLesson(CourseLesson courseLesson);
+
+    /*
+    * 修改课时信息
+    * */
+    public void updateLesson(CourseLesson courseLesson);
 
 }

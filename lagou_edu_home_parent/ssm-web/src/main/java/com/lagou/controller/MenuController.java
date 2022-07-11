@@ -4,9 +4,11 @@ import com.lagou.domain.Menu;
 import com.lagou.domain.ResponseResult;
 import com.lagou.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.awt.geom.RectangularShape;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +50,6 @@ public class MenuController {
             //修改操作 回显所有menu信息
             Menu menu= menuService.findMenuById(id);
 
-            //添加
             List<Menu> subMenuListByPid = menuService.findSubMenuListByPid(-1);
 
             //封装数据
@@ -56,6 +57,20 @@ public class MenuController {
             map.put("menuInfo",menu);
             map.put("parentMenuList",subMenuListByPid);
             return new ResponseResult(true,200,"修改回显成功",map);
+        }
+    }
+
+    /*
+    * 查询或修改菜单信息
+    * */
+    @RequestMapping("/saveOrUpdateMenu")
+    public ResponseResult saveOrUpdateMenu(@RequestBody Menu menu){
+        if(menu.getId() == null){
+            menuService.saveMenu(menu);
+            return new ResponseResult(true,200,"新加菜单成功",null);
+        }else{
+            menuService.updateMenu(menu);
+            return new ResponseResult(true,200,"修改菜单成功",null);
         }
     }
 

@@ -17,5 +17,14 @@ public interface MenuMapper {
     public List<Menu> findAllMenu();
 
 
-    Menu finMenuById(Integer id);
+    public Menu finMenuById(Integer id);
+
+    /*
+    * 新增菜单
+    * */
+    public void saveMenu(Menu menu);
+    /*
+    * 修改菜单
+    * */
+    public void updateMenu(Menu menu);
 }

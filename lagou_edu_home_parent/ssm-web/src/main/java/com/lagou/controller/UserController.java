@@ -26,7 +26,7 @@ public class UserController {
     *用户分页&多条件组合查询
     * */
 
-    @RequestMapping("/findAllUserByPage")
+    @RequestMapping("/findAllUser")
     public ResponseResult findAllUserByPage(@RequestBody UserVO userVO){
 
         PageInfo pageInfo = userService.findAllUserByPage(userVO);

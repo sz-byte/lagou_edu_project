@@ -31,4 +31,16 @@ public class MenuServiceImpl implements MenuService {
 
         return menuMapper.finMenuById(id);
     }
+
+    @Override
+    public void saveMenu(Menu menu) {
+        menuMapper.saveMenu(menu);
+    }
+
+    @Override
+    public void updateMenu(Menu menu) {
+        menuMapper.updateMenu(menu);
+    }
+
+
 }
