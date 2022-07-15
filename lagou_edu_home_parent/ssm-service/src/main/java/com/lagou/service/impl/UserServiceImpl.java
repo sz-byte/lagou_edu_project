@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public PageInfo findAllUserByPage(UserVO userVO) {
-        PageHelper .startPage(userVO.getCurrentPage(),userVO.getPageSize());
+        PageHelper.startPage(userVO.getCurrentPage(),userVO.getPageSize());
         List<User> allUserByPage = userMapper.findAllUserByPage(userVO);
 
         PageInfo<User> pageInfo = new PageInfo<>(allUserByPage);
@@ -114,5 +114,11 @@ public class UserServiceImpl implements UserService {
         map.put("resourceList",resourceList);
 
         return new ResponseResult(true,200,"获取用户权限信息成功",map);
+    }
+
+    @Override
+    public User selectUser(String name) {
+        User selectUser = userMapper.selectUser(name);
+        return selectUser;
     }
 }

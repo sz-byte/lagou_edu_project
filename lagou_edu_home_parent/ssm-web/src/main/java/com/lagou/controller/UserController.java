@@ -26,7 +26,7 @@ public class UserController {
     *用户分页&多条件组合查询
     * */
 
-    @RequestMapping("/findAllUser")
+    @RequestMapping("/findAllUserByPage")
     public ResponseResult findAllUserByPage(@RequestBody UserVO userVO){
 
         PageInfo pageInfo = userService.findAllUserByPage(userVO);
@@ -44,7 +44,7 @@ public class UserController {
             status = "ENABLE";
         }
         userService.updateUserStatus(id, status);
-        return new ResponseResult(true,200,"修改状态成功",null);
+        return new ResponseResult(true,200,"修改状态成功",status);
     }
 
     /*
@@ -59,15 +59,17 @@ public class UserController {
             //保存用户id及access_token到session中
             HttpSession session = request.getSession();
             String access_token = UUID.randomUUID().toString();
+            User selectUser = userService.selectUser(user.getPhone());
             session.setAttribute("access_token",access_token);
             session.setAttribute("user_id",user1.getId());
 
             //将查询出的数据响应给前台
             Map<String, Object> map = new HashMap<>();
             map.put("access_token",access_token);
+            map.put("user",selectUser);
             map.put("user_id",user1.getId());
 
-            return new ResponseResult(true,200,"登录成功",map);
+            return new ResponseResult(true,1,"登录成功",map);
 
         }else{
             return new ResponseResult(true,400,"用户名或密码错误",null);
@@ -95,29 +97,6 @@ public class UserController {
         return new ResponseResult(true,200,"分配角色成功",null);
     }
 
-    /*
-    * 获取用户权限，进行菜单动态展示
-    * */
-    @RequestMapping("/getUserPermissions")
-    public ResponseResult getUserPermissions(HttpServletRequest request){
-        //获取请求头中的token
-        String header_token = request.getHeader("Authorization");
 
-        //获取session中的token
-        String session_token =(String) request.getSession().getAttribute("access_token");
-
-        //判断token是否一致
-        if(header_token.equals(session_token)){
-            //获取用户id
-            Integer user_id =(Integer) request.getSession().getAttribute("user_id");
-            //调用service，进行菜单信息查询
-            ResponseResult responseResult = userService.getUserPermission(user_id);
-
-            return responseResult;
-        }else{
-            ResponseResult responseResult = new ResponseResult(false, 400, "获取菜单信息失败", null);
-            return responseResult;
-        }
-    }
 
 }

@@ -1,13 +1,12 @@
 package com.lagou.service.impl;
 
 import com.lagou.dao.RoleMapper;
-import com.lagou.domain.Role;
-import com.lagou.domain.RoleMenuVO;
-import com.lagou.domain.Role_menu_relation;
+import com.lagou.domain.*;
 import com.lagou.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -78,6 +77,45 @@ public class RoleServiceImpl implements RoleService {
         //调用根据roleid清空中间表关联关系
         roleMapper.deleteRoleContextMenu(roleid);
         roleMapper.deleteRole(roleid);
+    }
+
+
+
+    @Override
+    public List<ResourceCategory> findResourceListByRoleId(Integer id) {
+        List<Resource> resourceList = roleMapper.findResourceListByRoleId(id);
+        List<ResourceCategory> categoryList = roleMapper.findResourceCategoryByRoleId(id);
+
+        for (ResourceCategory category:categoryList) {
+            ArrayList<Resource> list = new ArrayList<>();
+            for (Resource resource:resourceList) {
+                if(resource.getCategoryId() == category.getId()){
+                    list.add(resource);
+                }
+            }
+            category.setResourceList(list);
+        }
+        return categoryList;
+    }
+
+    @Override
+    public void roleContextResource(RoleResourceVO roleResourceVO) {
+        roleMapper.deleteRoleResource(roleResourceVO.getRoleId());
+
+        for (Integer resourceId:roleResourceVO.getResourceIdList()) {
+            RoleResourceRelation roleResourceRelation = new RoleResourceRelation();
+            roleResourceRelation.setResourceId(resourceId);
+            roleResourceRelation.setRoleId(roleResourceVO.getRoleId());
+
+            Date date = new Date();
+            roleResourceRelation.setCreatedTime(date);
+            roleResourceRelation.setUpdatedTime(date);
+            roleResourceRelation.setUpdatedBy("system");
+            roleResourceRelation.setCreatedBy("system");
+
+            roleMapper.RoleResource(roleResourceRelation);
+        }
+
     }
 
 

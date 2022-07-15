@@ -77,4 +77,9 @@
         </foreach>
     </select>
 
+
+    <!--查询指定用户-->
+    <select id="selectUser" parameterType="String" resultType="com.lagou.domain.User">
+        select * from user where name = #{name}
+    </select>
 </mapper>

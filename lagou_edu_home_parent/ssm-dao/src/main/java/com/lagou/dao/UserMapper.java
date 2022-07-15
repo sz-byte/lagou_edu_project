@@ -48,4 +48,9 @@ public interface UserMapper {
     * 获取用户拥有的资源信息
     * */
     public List<Resource> findResourceByRoleId(List<Integer> ids);
+
+    /*
+     * 查询指定用户
+     * */
+    public User selectUser(String name);
 }

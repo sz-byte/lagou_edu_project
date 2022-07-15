@@ -9,6 +9,7 @@ import com.lagou.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,5 +24,21 @@ public class ResourceServiceImpl implements ResourceService {
         List<Resource> allResourceByPage = resourceMapper.findAllResourceByPage(resourceVO);
         PageInfo<Resource> pageInfo = new PageInfo<>(allResourceByPage);
         return pageInfo;
+    }
+
+    @Override
+    public void saveResource(Resource resource) {
+
+        resourceMapper.saveResource(resource);
+    }
+
+    @Override
+    public void updateResource(Resource resource) {
+        resourceMapper.updateResource(resource);
+    }
+
+    @Override
+    public void deleteResource(Integer id) {
+        resourceMapper.deleteResource(id);
     }
 }

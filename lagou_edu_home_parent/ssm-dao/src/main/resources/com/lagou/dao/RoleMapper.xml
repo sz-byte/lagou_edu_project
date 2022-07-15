@@ -58,4 +58,31 @@
         delete from roles where id = #{roleid}
     </delete>
 
+    <!--获取当前角色拥有的资源分类信息-->
+    <select id="findResourceCategoryByRoleId" parameterType="int" resultType="com.lagou.domain.ResourceCategory">
+        SELECT DISTINCT rc.* FROM
+                                 resource_category rc,resource r, role_resource_relation rrr
+        WHERE rc.id = r.category_id AND rrr.resource_id = r.id
+          AND rrr.role_id = #{id}
+    </select>
+
+    <!--获取当前角色的资源信息-->
+    <select id="findResourceListByRoleId" parameterType="int" resultType="com.lagou.domain.Resource">
+        SELECT r.* FROM
+                       resource r ,role_resource_relation rrr
+        WHERE r.id = rrr.resource_id AND rrr.role_id = #{id}
+
+    </select>
+
+    <!--根据角色id删除角色与资源关联关系-->
+    <delete id="deleteRoleResource" parameterType="int">
+        delete from role_resource_relation where role_id = #{id}
+    </delete>
+
+    <!--为角色分配资源-->
+    <insert id="RoleResource" parameterType="com.lagou.domain.RoleResourceRelation">
+        insert into role_resource_relation values
+       (null ,#{resourceId},#{roleId},#{createdTime},#{updatedTime},#{createdBy},#{updatedBy})
+    </insert>
+
 </mapper>

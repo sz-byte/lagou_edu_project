@@ -17,10 +17,10 @@
     <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
     <!--1.数据源的配置-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
-        <property name="driverClassName" value="${jdbc.dirve}"></property>
-        <property name="url" value="${jdbc.url}"></property>
-        <property name="username" value="${jdbc.username}"></property>
-        <property name="password" value="${jdbc.password}"></property>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://192.168.220.128:3306/ssm_lagou_edu?characterEncoding=UTF-8"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="QiDian@666"></property>
     </bean>
     <!--2.sqlSessionFactory-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

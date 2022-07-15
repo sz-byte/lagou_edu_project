@@ -41,4 +41,9 @@ public interface UserService {
     * */
     public ResponseResult getUserPermission(Integer userid);
 
+    /*
+    * 查询指定用户
+    * */
+    public User selectUser(String name);
+
 }

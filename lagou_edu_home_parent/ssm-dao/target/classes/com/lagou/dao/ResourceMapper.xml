@@ -19,4 +19,17 @@
 
         </where>
     </select>
+
+    <!--添加资源-->
+    <insert id="saveResource" parameterType="com.lagou.domain.Resource">
+        insert into resource values (null ,#{name},#{url},#{categoryId},#{description},#{createdTime},#{updatedTime},#{createdBy},#{updatedBy})
+    </insert>
+    <!--修改资源-->
+    <update id="updateResource" parameterType="com.lagou.domain.Resource">
+        update resource set name=#{name},url=#{url},category_id=#{categoryId},updated_time= #{updatedTime},updated_by=#{updatedBy} where id=#{id}
+    </update>
+    <!--删除资源-->
+    <delete id="deleteResource" parameterType="int">
+        delete from resource where id = #{id}
+    </delete>
 </mapper>

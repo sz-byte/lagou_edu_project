@@ -20,12 +20,15 @@ public class PromotionAd {
     // 文字一
     private String text;
     // 链接一
+
     private String link;
     // 开始时间
 
     private Date startTime;
     // 结束时间
+
     private Date endTime;
+
     private Date createTime;
     private Date updateTime;
     private Integer status;

@@ -94,6 +94,10 @@
         </dependency>
     </dependencies>
     </dependencyManagement>
+
+
+
+
     <dependencies>
     <!--mybatis坐标-->
     <dependency>
@@ -226,6 +230,8 @@
         </dependency>
 
     </dependencies>
+
+
     <build>
         <plugins>
             <plugin>
@@ -240,7 +246,6 @@
             </plugin>
         </plugins>
     </build>
-
 
 
 

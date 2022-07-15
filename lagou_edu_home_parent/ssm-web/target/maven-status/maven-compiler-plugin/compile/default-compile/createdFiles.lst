@@ -1,6 +1,7 @@
 com\lagou\controller\CourseContentController.class
 com\lagou\controller\RoleController.class
 com\lagou\controller\PromotionSpaceController.class
+com\lagou\controller\permissionController.class
 com\lagou\controller\UserController.class
 com\lagou\controller\ResourceCategoryController.class
 com\lagou\controller\ResourceController.class

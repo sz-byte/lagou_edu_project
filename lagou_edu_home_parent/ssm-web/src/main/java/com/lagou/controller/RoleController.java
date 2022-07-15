@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/role")
 public class RoleController {
@@ -17,37 +19,38 @@ public class RoleController {
     private RoleService roleService;
 
     @RequestMapping("/findAllRole")
-    public ResponseResult findAllUserByPage(@RequestBody Role role){
+    public ResponseResult findAllUserByPage(@RequestBody Role role) {
         List<Role> allRole = roleService.findAllRole(role);
-        ResponseResult responseResult = new ResponseResult(true,200,"响应成功",allRole);
+        ResponseResult responseResult = new ResponseResult(true, 200, "响应成功", allRole);
         return responseResult;
     }
 
     @RequestMapping("/saveOrUpdateRole")
-    public ResponseResult saveOrUpdateRole(@RequestBody Role role){
+    public ResponseResult saveOrUpdateRole(@RequestBody Role role) {
 
         System.out.println(role);
 
-        if(role.getId() == null){
+        if (role.getId() == null) {
             //新增
             roleService.saveRole(role);
-            return new ResponseResult(true,200,"新增角色成功",null);
-        }else {
+            return new ResponseResult(true, 200, "新增角色成功", null);
+        } else {
             //修改
             roleService.updateRole(role);
-            return new ResponseResult(true,200,"修改角色成功",null);
+            return new ResponseResult(true, 200, "修改角色成功", null);
         }
     }
 
     @Autowired
     private MenuService menuService;
+
     @RequestMapping("/findAllMenu")
-    public ResponseResult findSubMenuListByPid(){
+    public ResponseResult findSubMenuListByPid() {
 
         List<Menu> menuList = menuService.findSubMenuListByPid(-1);
 
         HashMap<String, Object> map = new HashMap<>();
-        map.put("parentMenuList",menuList);
+        map.put("parentMenuList", menuList);
 
         ResponseResult responseResult = new ResponseResult(true, 200, "查询所有的父子级菜单", map);
 
@@ -55,10 +58,10 @@ public class RoleController {
     }
 
     /*
-    * 根据角色ID查询关联的菜单信息
-    * */
+     * 根据角色ID查询关联的菜单信息
+     * */
     @RequestMapping("/findMenuByRoleId")
-    public ResponseResult findMenuByRoleId(Integer roleId){
+    public ResponseResult findMenuByRoleId(Integer roleId) {
 
         List<Integer> menuByRileId = roleService.findMenuByRoleId(roleId);
 
@@ -69,10 +72,10 @@ public class RoleController {
     }
 
     /*
-    * 为角色分配菜单
-    * */
+     * 为角色分配菜单
+     * */
     @RequestMapping("/RoleContextMenu")
-    public ResponseResult RoleContextMenu(@RequestBody RoleMenuVO roleMenuVO){
+    public ResponseResult RoleContextMenu(@RequestBody RoleMenuVO roleMenuVO) {
 
         roleService.roleContextMenu(roleMenuVO);
 
@@ -81,10 +84,10 @@ public class RoleController {
     }
 
     /*
-    * 输出角色
-    * */
+     * 输出角色
+     * */
     @RequestMapping("/deleteRole")
-    public ResponseResult deleteRole(Integer id){
+    public ResponseResult deleteRole(Integer id) {
 
         roleService.deleteRole(id);
         ResponseResult responseResult = new ResponseResult(true, 200, "删除角色成功", null);
@@ -92,4 +95,20 @@ public class RoleController {
 
     }
 
+    @RequestMapping("/findResourceListByRoleId")
+    public ResponseResult findResourceListByRoleId(Integer roleId) {
+        List<ResourceCategory> resourceList = roleService.findResourceListByRoleId(roleId);
+
+        ResponseResult responseResult = new ResponseResult(true, 200, "响应成功",resourceList);
+        return responseResult;
+
+    }
+
+    @RequestMapping("/roleContextResource")
+    public ResponseResult roleContextResource(@RequestBody RoleResourceVO roleResourceVO){
+        roleService.roleContextResource(roleResourceVO);
+
+        return new ResponseResult(true,200,"响应成功",null);
+    }
 }
+
